@@ -1,0 +1,37 @@
+@import "plugins/bootstrap/_bootstrap";
+
+#header {
+    margin-top: 20px;
+    margin-bottom: 40px;
+
+    h1 {
+        margin-top: 20px;
+    }
+}
+
+#content {
+    .formRow {
+        justify-content: center;
+    }
+
+    form button {
+        & > span {
+            vertical-align: middle;
+        }
+        .loadingSpinner {
+            margin-right: 10px;
+            display: none;
+        }
+        &.loading .loadingSpinner{
+            display: inline-block;
+        }
+    }
+
+    .ajaxContainer.loading {
+        & > .loadingSpinner {
+            display: block;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+    }
+}
