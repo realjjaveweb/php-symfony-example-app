@@ -1,0 +1,8 @@
+<ul>
+  {% for field, error_message in error_messages %}
+    <li>
+      <strong>{{ field }}:</strong> {{ error_message }}
+    </li>
+    {# we could use loop.first, .last, etc. if we'd want to play around with loop state somehow #}
+  {% endfor %}
+</ul>

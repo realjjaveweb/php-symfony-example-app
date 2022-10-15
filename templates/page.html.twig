@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <!-- linking the axios dependency first -->
+    <script src="{{ asset('js/axios-1.0.0-alpha.1/axios.min.js') }}"></script>
+    <!-- this is the "main" script -->
+    <script src="{{ asset('js/script.js') }}"></script>
+    <!-- note: defer could be used, but unless used for all coupled scripts,
+         it introduces unnecessary bug risk -->
+  </head>
+  <body>
+    <div id="header">
+      <div class="container headerContainer">
+        {% include 'navigation.html.twig' %}
+        <h1 class="text-center">{% block heading %}{% endblock %}</h1>
+      </div>
+    </div>
+    <div id="content">
+      {% block content %}
+
+      {% endblock %}
+    </div>
+    <div id="footer">
+      <div class="container text-center">&copy; {{ 'now'|date('Y') }}</div>
+    </div>
+  </body>
+</html>

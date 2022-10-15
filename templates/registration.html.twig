@@ -1,0 +1,62 @@
+{% extends 'page.html.twig' %}
+
+{% block title %}
+Registration
+{% endblock %}
+{% block heading %}
+Registration
+{% endblock %}
+
+{% block content %}
+<div class="container ajaxContainer" data-navigation="#registration">
+    {{
+        form_start(
+            form,
+            {
+                attr: {class: 'axios-post-data'},
+            }
+        )
+    }}
+    <div class="my-custom-class-for-errors">{{ form_errors(form) }}</div>
+
+    <div class="formRow form-group row">
+        {{ form_label(form.email, null, { 'label_attr': {'class': 'col-sm-2 col-form-label'} }) }}
+        <div class="col-sm-5">{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}</div>
+    </div>
+
+    <div class="formRow form-group row">
+        {{ form_label(form.role, null, { 'label_attr': {'class': 'col-sm-2 col-form-label'} }) }}
+        <div class="col-sm-5">{{ form_widget(form.role, {'attr': {'class': 'form-control'}}) }}</div>
+    </div>
+
+    <div class="formRow form-group row">
+        {{ form_label(form.password, null, { 'label_attr': {'class': 'col-sm-2 col-form-label'} }) }}
+        <div class="col-sm-5">{{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}</div>
+    </div>
+
+    <div class="formRow form-group row">
+        {{ form_label(form.name, null, { 'label_attr': {'class': 'col-sm-2 col-form-label'} }) }}
+        <div class="col-sm-5">{{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}</div>
+    </div>
+
+    <div class="formRow form-group row">
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-5">{{
+            form_widget(form.save, {
+                'attr': {'class': 'form-control btn btn-primary'},
+                'label': '<span class="spinner-border spinner-border-sm loadingSpinner"></span><span>Create User</span>',
+                'label_html' : true,
+            })
+        }}</div>
+    </div>
+
+    <div class="formMessage formSuccess alert alert-success d-none" role="alert">
+    </div>
+    <div class="formMessage formError alert alert-danger d-none" data-default-message="An unknown error occurred." role="alert">
+    </div>
+
+    {{ form_rest(form) }}
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}
