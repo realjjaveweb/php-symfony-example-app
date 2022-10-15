@@ -6,6 +6,9 @@ This app runs through a Docker-ized environment using following:
 
 ## Prerequisites
 
+### GIT Versioning system
+Make sure you have `git` available on your system.
+
 ### OS
 Although this app could be ran on Windows/Mac, Linux(Ubuntu-based) is recommend and is assumed by this README.
 Windows note: On Windows, you can use "Windows Subsystem for Linux" WSL/WSL2 with Linux(Ubuntu or compatible)
