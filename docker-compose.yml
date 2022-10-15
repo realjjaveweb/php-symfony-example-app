@@ -1,0 +1,59 @@
+version: '3.0'
+services:
+  db:
+    image: mariadb:10.9.2
+    container_name: db
+    working_dir: /app
+    command: [ mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --innodb-file-per-table=1]
+    env_file: .env
+    volumes:
+      - mariadb-storage:/var/lib/mysql
+    networks:
+      - appnetwork
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/#restart
+    restart: unless-stopped # restart always, unless the container is "stopped" (manually or otherwise)
+
+    # following is only valid for `docker stack deploy` / "deploy to a swarm":
+    # https://docs.docker.com/compose/compose-file/compose-file-v3/#restart_policy)
+    # deploy:
+    #   restart_policy:
+    #     condition: any
+    #     delay: 2s
+    #     max_attempts: 3
+    #     window: 0s
+
+  api:
+    container_name: api
+    build:
+        context: .
+        dockerfile: ./devops/DockerfilePHP
+    env_file: .env
+    volumes:
+      - .:/var/www/html
+      # if we would need it, we could override the php.ini like:
+      - ./devops/php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - 9000:80
+    depends_on:
+      - db
+    networks:
+      - appnetwork
+    restart: "no"  # never restart automatically ([no] must be specifically wrapped in quotes "")
+
+  # dev services
+  adminer:
+    container_name: adminer
+    image: adminer:4.8.1
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    networks:
+      - appnetwork
+    restart: unless-stopped
+
+volumes:
+  mariadb-storage:
+
+networks:
+  appnetwork:
