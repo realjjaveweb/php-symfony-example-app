@@ -8,6 +8,7 @@ use App\Controller\Boundaries\RegistrationInput;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Criteria;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserService
 {
@@ -16,6 +17,7 @@ class UserService
         // and then we would bind it to the target implementation
         // in config/services.yaml (seemed redundant for this showcase)
         private readonly UserRepository $userRepository,
+        private readonly UserPasswordHasherInterface $passwordHasher,
     ) {
     }
 
@@ -27,7 +29,13 @@ class UserService
         );
         $user->setEmail($input->getEmail());
         $user->setRoles([$input->getRole()]);
-        $user->setPassword($input->getPassword());
+        $user->setPassword(
+            // don't forget to NEVER store plain text user passwords!
+            $this->passwordHasher->hashPassword(
+                $user,
+                $input->getPassword()
+            )
+        );
         $user->setName($input->getName());
 
         $this->userRepository->add($user, flush: true);
