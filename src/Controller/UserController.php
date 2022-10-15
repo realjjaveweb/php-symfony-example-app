@@ -63,8 +63,8 @@ class UserController extends BaseController
             }
         } catch (UniqueConstraintViolationException $e) {
             return $this->getServerErrorResposne(
-                'No can do - this is a WILD guess, but isn\'t maybe the email address already in our system?'
-                . 'we\'re really not that sure, you can blame the Dolphins and other Sea Lions ;)'
+                'No can do - this is a WILD guess, but isn\'t maybe the email address already in our system? ...'
+                . '<br>...we\'re really not that sure, you can blame the Dolphins and other Sea Lions ;)'
             );
         } catch (\Throwable $e) {
             $this->logger->error('Error during registration form processing', [$e]);
