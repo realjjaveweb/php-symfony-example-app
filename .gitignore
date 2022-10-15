@@ -1,0 +1,21 @@
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+# Tools ignores
+/tools/php-cs-fixer/*
+# ignore everything in php-cs-fixer except these 2 files:
+!/tools/php-cs-fixer/composer.json
+!/tools/php-cs-fixer/composer.lock
+
+# IDE ignores
+.vscode
+.idea
+nbproject
