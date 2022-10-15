@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Controller\Boundaries\UserListOutput;
 use App\Controller\Form\RegistrationForm;
 use App\Service\UserService;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,6 +61,11 @@ class UserController extends BaseController
                     errors: $this->getFormErrorsOutput($form),
                 );
             }
+        } catch (UniqueConstraintViolationException $e) {
+            return $this->getServerErrorResposne(
+                'No can do - this is a WILD guess, but isn\'t maybe the email address already in our system?'
+                . 'we\'re really not that sure, you can blame the Dolphins and other Sea Lions ;)'
+            );
         } catch (\Throwable $e) {
             $this->logger->error('Error during registration form processing', [$e]);
             return $this->getServerErrorResposne();
