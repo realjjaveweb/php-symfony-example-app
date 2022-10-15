@@ -45,6 +45,7 @@ class RegistrationForm extends AbstractType
     {
         $commonOptions = [
             // possible common options
+            'trim' => true,
         ];
         $builder
             ->setMethod(Request::METHOD_POST)
