@@ -1,0 +1,9 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+
+# Showcase how one can define routes in this config (instead of e.g. the #[] controller method attribute)
+# home:
+#     path: /
+#     controller: App\Controller\HomeController::index
+#     methods: GET
