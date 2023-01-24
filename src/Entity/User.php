@@ -18,7 +18,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'simple_array', enumType: Roles::class)]
     private array $roles = [];
 
     /**
@@ -64,9 +64,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        if (!in_array(Roles::ROLE_USER, $roles, strict: true)) {
+            $roles[] = Roles::ROLE_USER;
+        }
 
-        return array_unique($roles);
+        return $roles;
     }
 
     public function setRoles(array $roles): self
