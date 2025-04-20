@@ -1,3 +1,9 @@
+# Author's recommendation: Don't use Symfony Forms
+... unless you absolutely have to ...
+Usage of Symfony Forms in this repository was **purely for demonstration purposes**.
+I strongly discourage you from ever even starting to develop something based on SF forms.
+Are there replacements? Yes. Is there a drop-in replacement? Not really - usually you will find validators and/or form object creators and templating systems separately.
+
 # The App
 This app runs through a Docker-ized environment using following:
 - Apache as a webserver
